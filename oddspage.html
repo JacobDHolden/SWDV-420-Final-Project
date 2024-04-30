@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>HoldensSafeBettingAdvice</title>
+  <link href="oddspage.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<h3>Understanding Odds.</h3>
+<p>Odds are a representation of the outcome of an event.</p> 
+<p>-110 means that you must bet $110 to win $100.</p> 
+<p>But, -110 really means that the book is stating there is a %52.38 chance that the team offered for -110 wins.</p>
+<p>However, the book is stating that there is a %50 that the team wins. The additional 2.38% is a percent added to ensure that the book will make a profit. Therefore, the book offers a 50/50 chance for -110 and not -100 or +100, which is the same.</p>
+  <p>Below is a calculator that will remove the viggorish and show you the percentage of an outcome to occur.</p>
+  <p>Good luck and be smart.</p>
+
+  <h4>How to interpet the Calculator</h4>
+  <ol>
+    <li>Enter the odds offered by the book/bookie service you are using.</li>
+    <li>Click the calculate button</li>
+    <li>Review the percentages and viggorish.</li>
+    <li>Evaluate if you believe one the outcomes has a greater to chance to occur than the odds you see offered.</li>
+    <li>If you believe the chance of the event to occur is greater than what the book is offfering, place your bet.</li>
+    <li>Shop around! Some books offer better odds than others.</li>
+    <li>Do not bet mroe than you can stomach or afford to lose!!!</li>
+  </ol>
+  <form id="inputForm">
+    <label for="openMLFav">Open ML Favorite:</label>
+    <input type="number" id="openMLFav" name="openMLFav"><br><br>
+
+    <label for="openMLDog">Open ML Dog:</label>
+    <input type="number" id="openMLDog" name="openMLDog"><br><br>
+
+    <button type="submit">Calculate</button>
+  </form>
+
+  <div id="output"></div>
+
+  <script>
+    document.getElementById("inputForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      var openMLFav = parseFloat(document.getElementById("openMLFav").value);
+      var openMLDog = parseFloat(document.getElementById("openMLDog").value);
+
+      var impProbFav, impProbDog, totalImpProb, vig, noVigImpProbFav, noVigImpProbDog;
+
+      // Calculation for Favorite
+      if (openMLFav < 0) {
+        openMLFav = Math.abs(openMLFav);
+        impProbFav = ((openMLFav / (openMLFav + 100)) * 100).toFixed(2);
+      } else {
+        impProbFav = ((100 / (openMLFav + 100)) * 100).toFixed(2);
+      }
+
+      // Calculation for Underdog
+      if (openMLDog < 0) {
+        openMLDog = Math.abs(openMLDog);
+        impProbDog = ((openMLDog / (openMLDog + 100)) * 100).toFixed(2);
+      } else {
+        impProbDog = ((100 / (openMLDog + 100)) * 100).toFixed(2);
+      }
+
+      var output = document.getElementById("output");
+      output.innerHTML = "<p>Favorite Imp Prob to win: " + impProbFav + "%</p>";
+      output.innerHTML += "<p>Underdog Imp Prob to win: " + impProbDog + "%</p>";
+
+      // Calculation for Total Imp Prob
+      totalImpProb = parseFloat(impProbFav) + parseFloat(impProbDog);
+      vig = (totalImpProb - 100).toFixed(2);
+
+      noVigImpProbFav = ((parseFloat(impProbFav) / totalImpProb) * 100).toFixed(2);
+      noVigImpProbDog = ((parseFloat(impProbDog) / totalImpProb) * 100).toFixed(2);
+
+      output.innerHTML += "<p>Viggorish: " + vig + "%</p>";
+      output.innerHTML += "<p>No Vig Favorite Imp Prob: " + noVigImpProbFav + "%</p>";
+      output.innerHTML += "<p>No Vig Underdog Imp Prob: " + noVigImpProbDog + "%</p>";
+
+      // Fair Value Odds calculation
+      var noVigImpprobFavDec = noVigImpProbFav / 100;
+      var noVigImpprobDogDec = noVigImpProbDog / 100;
+
+      var favFairValOdds, dogFairValOdds;
+
+      if (noVigImpprobFavDec >= 0.50) {
+        favFairValOdds = Math.round(-(noVigImpprobFavDec / (1 - noVigImpprobFavDec)) * 100);
+      } else {
+        favFairValOdds = Math.round((1 - noVigImpprobFavDec) / noVigImpprobFavDec * 100);
+      }
+
+      if (noVigImpprobDogDec >= 0.50) {
+        dogFairValOdds = Math.round(-(noVigImpprobDogDec / (1 - noVigImpprobDogDec)) * 100);
+      } else {
+        dogFairValOdds = Math.round((1 - noVigImpprobDogDec) / noVigImpprobDogDec * 100);
+      }
+
+      output.innerHTML += "<p>Favorite Fair Value Odds: " + favFairValOdds + "</p>";
+      output.innerHTML += "<p>Dog Fair Value Odds: " + dogFairValOdds + "</p>";
+    });
+  </script>
+
+  <a href="homepage.html">Home Page</a>
+  <a href="glossary.html">Glossary</a>
+
+</body>
+
+</html>

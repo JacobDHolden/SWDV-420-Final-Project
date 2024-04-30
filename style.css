@@ -1,0 +1,91 @@
+/* Reset default browser styles */
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Body styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f2f7f9;
+  /* Soft blue-gray */
+  color: #333;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container styles */
+article,
+section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  /* White */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading styles */
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+h3 {
+  font-size: 1.8em;
+  margin-top: 30px;
+  color: #333;
+}
+
+/* Paragraph styles */
+p {
+  font-size: 1.2em;
+  line-height: 1.6;
+}
+
+/* List styles */
+ol,
+ul {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+/* Link styles */
+a {
+  color: #007bff;
+  /* Soft blue */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Image styles */
+img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Footer styles */
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+}
+
+/* Navigation links */
+nav a {
+  margin-right: 20px;
+}
